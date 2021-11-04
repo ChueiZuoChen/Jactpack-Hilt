@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 //ApplicationComponent is Deprecated in Dagger Version 2.30
@@ -20,6 +21,17 @@ object AppModule {
     //if don't use @Singleton annotation every time do inject it will create new instance.
     @Singleton
     @Provides
-    fun provideTestString() = "This is a string I injected"
+    @Named("Dependency1")
+    fun provideTestString1() = "This is first string injected"
+
+    /*
+    *  Q:If have many dependencies how can we know that which dependencies is used?
+    *  A:can using @Named annotation to specific each dependency have unique name
+    * */
+
+    @Singleton
+    @Provides
+    @Named("Dependency2")
+    fun provideTestString2() = "This is second string injected"
 
 }
